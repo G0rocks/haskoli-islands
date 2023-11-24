@@ -527,6 +527,17 @@ Slík afpökkun er notuð í næsta kafla þegar lesið er inn í NumPy vigra ú
    
    Náið svo í dálka þess inn í tvo vigra með því að bylta því fyrst og afpakka svo.
 
+Föll af fylkjum
+---------------
+Numpy er með ýmis föll sem hafa fylki sem viðfang. Fyrst má nefna NumPy-útgáfur
+af venjulegum stærðfræðiföllum, sem beita má stakvís á fylki jafnt sem vigra,
+sbr. grein :numref:`venjulegum stærðfræðiföllum beitt á vigra`. Í grein
+:numref:`andhverfur og ákveður` eru föllin ``np.det`` og ``np.inv``, sem reikna
+ákveður og andhverfur, kynnt til sögunnar, og loks skulu nefnd föllin ``np.sum``
+sem finnur summu allra staka í fylki og ``np.shape`` sem skilar tvennd með
+fjölda lína og dálka. Hér hafa aðeins verið talin örfá af þeim fjölda
+fylkjafalla sem NumPy hefur.
+   
 Föll til að búa til fylki
 -------------------------
 Við höfum þegar séð hvernig hægt er að búa til fylki með því að telja upp stökin
@@ -549,12 +560,9 @@ nokkur sem verður nánar lýst í seinni köflum.
 
    * - ``np.diag(v)``
      - (fyrir :math:`n`-vigur ``v``) skilar :math:`n \times n` hornalínufylki
-       með stökum ``v`` á |br| hornalínunni (sjá `Fyrirlestrarnótur um
+       með stökum ``v`` á |br| hornalínunni (sjá `Valin efni í
        stærðfræði og reiknifræði
        <https://cs.hi.is/strei/kafli02/#ymis-vigur-og-fylkjahugtok>`_)
-
-   * - ``np.inv(A)``
-     - andhverfa ``A`` (sjá kafla :numref:`andhverfur og ákveður`)
 
    * - ``rng.random((m,n))``
      - :math:`m \times n` slembifylki (sjá kafla :numref:`slembitölur með numpy`)
@@ -845,6 +853,7 @@ prófa ýmsar aðferðir til að lesa skrár og vinna með gögn í NumPy (eða 
 - `flokkslitir.txt <https://cs.hi.is/python/flokkslitir.txt>`_
 - `malmar.txt <https://cs.hi.is/python/malmar.txt>`_
 - `allir-malmar.txt <https://cs.hi.is/python/allir-malmar.txt>`_
+- `aldursdreifing.txt <https://cs.hi.is/python/aldursdreifing.txt>`_
 - `blom.txt <https://cs.hi.is/python/blom.txt>`_
 - `evropulond.txt <https://cs.hi.is/python/evropulond.txt>`_
 - `hofudborgir.txt <https://cs.hi.is/python/hofudborgir.txt>`_

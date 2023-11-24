@@ -703,7 +703,7 @@ Eftirfarandi skilgreining er fengin að láni úr `fyrirlestrarnótum um Stærð
 Þar er líka sannað að :math:`f_{xy}(x,y) = f_{yx}(x,y)` ef :math:`f` uppfyllir
 tiltekin samfelldniskilyrði, sem flest föll sem við fáumst við gera.
 
-Annars stigs hlutafleiður eru oft settar fram í fylki:
+Annars stigs hlutafleiður eru oft settar fram í fylki sem stundum er táknað með :math:`\nabla^2 f`:
 
 .. admonition:: Skilgreining: Hesse-fylki
    :class: regla
@@ -713,7 +713,7 @@ Annars stigs hlutafleiður eru oft settar fram í fylki:
 
    .. math::
       
-      H(p)= \begin{bmatrix}
+      H(p)=\nabla^2 f(p) = \begin{bmatrix}
       f_{xx}(x,y)&f_{xy}(x,y) \\ 
       f_{yx}(x,y)&f_{yy}(x,y)
       \end{bmatrix}
@@ -721,8 +721,9 @@ Annars stigs hlutafleiður eru oft settar fram í fylki:
 Skv. framansögðu er Hesse-fylkið (yfirleitt) samhverft.
 
 **Ákveða** (*determinant*) er hugtak sem oft er notað í línulegri algebru.
-Ákveður verða notaðar í næsta kafla til að flokka útgildi. Fyrir :math:`2 \times
-2` fylki er skilgreining ákveðunnar einföld:
+Ákveður verða notaðar í næsta undirkafla til að flokka útgildi og í kafla
+:numref:`fylkjaalgebra` er setning sem tengir ákveður og andhverfanleg fylki.
+Fyrir :math:`2 \times 2` fylki er skilgreining ákveðunnar einföld:
 
 .. admonition:: Skilgreining: Tvívíð ákveða
    :class: regla
@@ -733,7 +734,18 @@ Skv. framansögðu er Hesse-fylkið (yfirleitt) samhverft.
    .. math::
 
       \det(A) = ad - bc
+
+Ákveður má skilgreina fyrir almenn ferningslaga fylki, en skilgreiningin er
+dálítið flókin og við látum duga að vísa í `Wikipedíugreinina um ákveður
+<https://en.wikipedia.org/wiki/Determinant>`_.
          
+.. admonition:: Python: Ákveða 
+   :class: python
+
+   Fallið ``la.det`` má nota til að reikna ákveðu ferningslaga fylkis. Til að
+   virkja það þarf að flytja NumPy pakka fyrir línulega inn með ``import
+   numpy.linalg as la``.
+
 Útgildi tvívíðra falla
 ----------------------
 
@@ -769,8 +781,11 @@ jöfnunnar
 
 gefa þá útgildin en auk þess söðulpunkta (*saddle points*) sem sum föll hafa.
 Það eru punktar þar sem stigullinn er núll, og þannig að til er leið frá þeim
-með vaxandi :math:`f`-gildum og önnur með minnkandi :math:`f`-gildum. Dæmi er
-fallið :math:`f(x,y) = 10 + x^2 - y^2` sem sýnt er á eftirfarandi mynd:
+með vaxandi :math:`f`-gildum og önnur með minnkandi :math:`f`-gildum.
+**Sérstöðupunktur** er samheiti yfir hágildis-, lággildis- og söðulpunkta.
+
+Dæmi um fall með söðulpunkt er :math:`f(x,y) = 10 + x^2 - y^2` sem sýnt er á
+eftirfarandi mynd:
 
 .. figure:: myndir/söðulpunktur.jpg
    :align: center
@@ -791,21 +806,22 @@ Stundum er hægt að leysa þessar jöfnur með algebru/stærðfræðigreiningu,
 en ekki þarf að beita tölulegum aðferðum. Eftir að lausnirnar eru fundnar
 þarf svo að flokka þær í hágildi, lággildi og söðulpunkta.
 
-.. admonition:: Sýnidæmi: Útgildispunktar
+.. admonition:: Sýnidæmi: Sérstöðupunktar
    :class: synidaemi
 
-   Ákvörðum útgildispunkta fallsins
+   Ákvörðum sérstöðupunkta fallsins
 
    .. math:: f(x,y) = x^2 + xy + y^2 - 3x
 
-   Stigullinn er :math:`\nabla f = (2x + y - 3, x + 2y)` svo við þurfum að leysa jöfnurnar:
+   Stigullinn er :math:`\nabla f = (2x + y - 3, x + 2y)` svo við þurfum að leysa
+   jöfnurnar:
 
    .. math:: 2x + y = 3\\ x + 2y = 0
 
    Smá útreikningar gefa nú :math:`x = 2` og :math:`y = -1`. En er þetta
    lággildi, hágildi eða söðulpunktur? Svarið er lággildi, og það er m.a. hægt
    að sjá útfrá því að þetta er eina lausnin, og að fallið vex upp úr
-   öllu valdi ef x og y eru látin stefna á óendanlegt.
+   öllu valdi ef :math:`x` og :math:`y` eru látin stefna á óendanlegt.
 
    .. figure:: myndir/synidaemi.jpg
       :align: center
@@ -813,6 +829,55 @@ en ekki þarf að beita tölulegum aðferðum. Eftir að lausnirnar eru fundnar
 
       Graf fallsins f og lággildispunkturinn p
               
+.. rubric:: Flokkun útgilda
+
+Hér að framan skoðuðum við hvað gerist fyrir stór :math:`x` og :math:`y` til að
+sjá að um lággildi væri að ræða, en önnur aðferð til að sjá hvort hvort núllstöð
+stiguls tvíðs falls sé hágildis-, lággildis- eða söðulpunktur er að reikna
+Hesse-fylki fallsins í núllstöðinni, í framhaldi ákveðu þess, og nota svo
+eftirfarandi reglu:
+   
+.. admonition:: Regla: Hesse-fylki og útgildi
+   :class: regla
+
+   Gerum ráð fyrir að :math:`\nabla f(x,y) = 0`, :math:`H = \nabla ^2 f(x,y)` og
+   :math:`a = h_{11} = f_{xx}(x,y)`. Þá gildir:
+
+   1. Ef :math:`\det(H) > 0` og :math:`a > 0` þá hefur :math:`f` staðbundið lággildi
+      í :math:`(x,y)`
+
+   2. Ef :math:`\det(H) > 0` og :math:`a < 0` þá hefur :math:`f` staðbundið hágildi
+      í :math:`(x,y)`
+
+   3. Ef :math:`\det(H) < 0` þá hefur :math:`f` söðulpunkt í :math:`(x,y)`
+
+   4. Ef :math:`\det(H) = 0` þá er ekkert hægt að segja.
+
+.. admonition:: Sýnidæmi: Útgildispunktar, framhald
+   :class: synidaemi
+
+   Hesse-fylki fallsins :math:`f` fæst með því að diffra aftur:
+
+   .. math::
+
+      \nabla^2 f(x,y) = \begin{pmatrix}
+      2 & 1 \\ 
+      1 & 2
+      \end{pmatrix}
+
+   (t.d. fæst stakið efst til vinstri með því að diffra :math:`f_x(x,y) = 2x + y - 3`
+   með tilliti til :math:`x`). Fylkið er sem sé fasti og því:
+
+   .. math::
+
+      H = \nabla^2 f(2,-1) = \begin{pmatrix}
+      2 & 1 \\ 
+      1 & 2
+      \end{pmatrix}
+
+   Svo fæst :math:`\det(H) = 2 \cdot 2 - 1 \cdot 1 = 3` og :math:`a =
+   h_{11} = 2`. Skv. síðustu reglu er því punkturinn :math:`(2,-1)` lággildispunktur.
+      
 .. admonition:: Æfing: Loklaus kassi
    :class: aefing
 
@@ -930,4 +995,3 @@ Stigull af :math:`n`-víðu falli er :math:`n`-vigur:
 
 Eins og fyrir tvívíð föll segir stigullinn okkur í hvaða átt fallið vex hraðast. Við getum hugsað okkur fugl á flugi sem er kalt, hann gæti e.t.v. haft vit á að fljúga í stefnu stiguls þrívíða fallsins :math:`H` sem talað var um í greinininn hér á undan. Margvíðir stiglar verða aftur á dagskrá þegar fjallað verður um Taylor-nálgun í kaflanum um línulega algebru.
 
-[Efni í vinnslu]

@@ -260,7 +260,7 @@ Skrifið fall ``tölfræði(x)`` sem skilar pari ``(m, s)`` með meðaltali og s
    m &= \frac{1}{n}\sum_{i=0}^{n-1}{x[i]}\\
    s &= \sqrt{\frac{1}{n-1}\sum_{i=0}^{n-1}(x[i] - m)^2}
 
-Prófið með ``x = [3,7,7,1]`` (á að skila ``[4.5, 3.0]``) og líka með lista ``[d,m,á]`` búnum til úr fæðingardegi..
+Prófið með ``x = [3,7,7,1]`` (á að skila ``[4.5, 3.0]``) og líka með lista ``[d,m,á]`` búnum til úr fæðingardegi.
 
 Bóluröðun
 ~~~~~~~~~
@@ -1156,7 +1156,7 @@ snyrtilega, m.a. merkja ása og setja inn titla og passa að þær séu mátuleg
 stórar. Mörk súlna í súluritunum þurfa að vera rúnnaðar tölur (t.d. heilar eða
 hálfar tölur) og súlurnar eiga að hafa bil á milli sín. Þeir sem vilja mega
 setja einhverjar teikningar hlið við hlið með því að nota ``plt.subplot``, sbr.
-kafla :numref:`gervigögn` og einfalda lýsingu hjá `w3schools
+kafla :numref:`gervigögn og aðhvarf` og einfalda lýsingu hjá `w3schools
 <https://www.w3schools.com/python/matplotlib_subplots.asp>`_.
 
 1. Teiknið þrjú súlurit af aldri, hæð og þyngd.
@@ -1563,7 +1563,7 @@ Dæmi af prófi í Tölvunarfræði 1a 2020
    tveimur niðurstöðum (t.d. með dæmi). Nefnið tvær aðgerðir sem beita má á
    lista en ekki samstæður.
 
-3. Útskýrið, t.d. með dæmum, muninn á aðgerðunum + og * þegar þeim er beitt á
+3. Útskýrið, t.d. með dæmum, muninn á aðgerðunum ``+`` og ``*`` þegar þeim er beitt á
    1. Lista
    2. NumPy vigra
 
@@ -1757,3 +1757,53 @@ eftir kommunum í skránni).
    kosningaúrslitin með flokksnöfnum.
 3. Bætið við dálki með hlutfalli atkvæða sem hver flokkur fékk og birtið svo nýja
    töflu yfir þá flokka sem fengu meira en 5% (og komu þar með manni á þing).
+
+Dýraklasi
+~~~~~~~~~
+a. Búið til afstrakt klasa ``Dýr``. Klasinn á að hafa klasabreytur ``tegund``
+   (strengur), ``fótafjöldi`` (heiltala), og ``segir`` (strengur, t.d.
+   ``"voff"``), og klasaaðferð ``segja`` sem á að skrifa tvisvar á skjáinn hvað
+   dýrið segir (t.d. ``"voff voff"``, ``"me me"``). Klasabreytur fá gildið
+   ``None``. Klasinn á líka að hafa eiginleika ``nafn`` (strengur) og ``litur``
+   (strengur). Ennfremur á klasinn að hafa *smið* og *útskriftaraðferð*
+   ``__str__``. Útskriftaraðferðin gæti t.d. skrifað út "Snúlla er bröndótt
+   kisa" (eftir að búið er að búa til kisuklasa sem erfir frá *Dýr*).
+   
+b. Búið til (konkret) klasa ``Hundur`` sem erfir frá klasanum ``Dýr``. Hann
+   hefur smið sem kallar á smið yfirklasans og aðferð ``gelta`` sem kallar á
+   ``segja`` í yfirklasanum. Það þarf líka að gefa klasabreytunum þremur
+   viðeigandi gildi. Búið svo til tilvik af hundi sem heitir Snati og er
+   svartur. Prentið hann út ásamt fótafjöldanum og látið hann gelta. Búið líka
+   til klasa ``Önd`` með aðferð ``kvaka`` og prófið með sama hætti. Forritið
+   ætti að skrifa út eitthvað á þessa leið:
+
+   .. code:: text
+
+      Snati er svartur hundur
+      Hann hefur 4 fætur
+      voff voff
+
+      Andrés er brún önd
+      Hún hefur 2 fætur
+      bra bra
+
+Ef forritað er eins og hér hefur verið lýst er ekkert sem kemur í veg fyrir að
+búin sé til hlutur af taginu *Dýr*, í andstöðu við tilganginn með afstrakt
+klösum. Byrjið á að skoða `Wikipedíugreinina um þá
+<https://en.wikipedia.org/wiki/Abstract_type>`_ og sömuleiðis eitthvað um Python
+pakkann *abc* (*abstract base classes*); mér sýnist `þessi síða
+<https://dev.to/dollardhingra/understanding-the-abstract-base-class-in-python-k7h>`_
+einföld og skilmerkileg. Leysið svo eftirfarandi:
+
+c. Sannreynið að það er ekkert mál að búa til dýr af engri sérstakri tegund. Til
+   að fá villu ef reynt er að búa til tilvik af afstrakt klasa þarf hann að vera
+   með a.m.k. eina afstract aðferð. Bætið afstrakt aðferð ``hreyfast`` við
+   klasann Dýr sem er bara með eina línu, ``pass``. Látið klasann erfa frá
+   yfirklasanum ABC (eftir ``from abc import ABC``) og látið nýju aðferðina
+   vera afstrakt (með því að setja ``@abstractmethod`` framan við hana).
+   Prófið nú að búa til dýr.
+   
+d. Eftir þessar "úrbætur" er orðið skylda að undirklasarnir útfæri (*implement*,
+   endurskilgreini) aðferðina ``hreyfast``. Prófið fyrst að búa til hund án
+   slíkrar útfærslu og svo með (hún gæti t.d. skrifað út "Ég get gengið og
+   hlaupið"). Endurtakið fyrir öndina (hún getur gengið, flogið og synt).

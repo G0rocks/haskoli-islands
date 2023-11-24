@@ -187,8 +187,8 @@ stokkuð (*shuffled*). Þriðja aðgerðin sem stundum þarf er að skila tölun
          spurning = ["Litur himinsins?", "2+2?", "Hver vann?", "Er sól?"]
          svar = ["blár", "4", "Jói", "nei"]
 
-Gervigögn
----------
+Gervigögn og aðhvarf
+--------------------
 Eins og sagt var fremst í þessum :numref:`%s. kafla <slembitölur>` er ein af
 hagnýtingum slembitalna sú að búa til gervigögn. Við sáum dæmi um það þegar búin
 voru til súlurit af normaldreifðum gögnum í :numref:`%s. kafla <teikning með matplotlib>`.

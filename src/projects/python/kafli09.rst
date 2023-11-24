@@ -73,7 +73,7 @@ scatter-skipunin teiknar punktana sjálfa með flatarmál u.þ.b. 40 ferpunkta
 teiknar grid rúðunet. Í ``skipuninni`` er hægt að tilgreina lit punkta, sbr.
 fyrra sýnidæmið í kafla :numref:`dæmi um teikningu talnagagna` og þeir geta
 líka verið hver með sínum lit sbr. dæmið um besta plan í kafla
-:numref:`gervigögn`.
+:numref:`gervigögn og aðhvarf`.
 
 .. code:: python
 
@@ -393,7 +393,7 @@ helstu stýristika og stýriskipanir.
    * - ``c``
      - vigur af litum (hver punktur í sínum lit). Má vera vigur af
        tölum og þá litast |br| punktarnir með **litaskala** (*color map*;
-       sjá athugasemd hér fyrir neðan) (:numref:`gervigögn`)
+       sjá athugasemd hér fyrir neðan) (:numref:`gervigögn og aðhvarf`)
 
    * - ``alpha``
      - gagnsæi, sjá töfluna að ofan
@@ -413,8 +413,8 @@ helstu stýristika og stýriskipanir.
    
    Þessar fyrirlestrarnótur skauta framhjá umfjöllun um **litaskala**, en um þá
    er fjallað allítarlega í `Viðauka A4
-   <https://cs.hi.is/strei/vi%C3%B0auki-A/#a4-litaskalar>`_ í *Fyrirlestrarnótum
-   í stærðfræði og reiknifræði*. Um litaskala er líka fjallað í 4. kafla í
+   <https://cs.hi.is/strei/vi%C3%B0auki-A/#a4-litaskalar>`_ í *Valin efni í
+  stærðfræði og reiknifræði*. Um litaskala er líka fjallað í 4. kafla í
    `Python Data Science Handbook
    <https://jakevdp.github.io/PythonDataScienceHandbook>`_.
        
@@ -431,7 +431,7 @@ helstu stýristika og stýriskipanir.
 
    * - ``plt.clim(cmin, cmax)``
      - Stillir neðri og efri mörk \"litaáss\" innan **litaskala** sem er |br|
-       í notkun – sjá athugasemd hér næst á undan (:numref:`gervigögn`)
+       í notkun – sjá athugasemd hér næst á undan (:numref:`gervigögn og aðhvarf`)
 
    * - ``plt.title(strengur)``
      - setur fyrirsögn á teikningu (:numref:`dæmi um teikningu talnagagna`)

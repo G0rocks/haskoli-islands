@@ -33,10 +33,11 @@ að búa til nýtt tilvik af klasanum. Hægt er að búa til klasa sem **erfir**
 **yfirklasa** (*superclass*)). Stundum setur undirklasi **skorður**
 (*constraints*) á eiginleikana sem erfast.
 
-Loks má geta hugtakanna **einka-** (*private*) og **opinber** (*public*).
-Einkaaðferðir eru hjálparföll til að útfæra klasa og aðeins aðgengilegar í
-(öðrum) aðferðum hans, og sama gildir um einkaeiginleika. Opinberar aðferðir og
-opinberir eiginleikar eru hinsvegar aðgengilegir öllum sem nota klasann.
+Loks má geta hugtakanna **einka-** (*private*), **verndaður** (*protected*) og
+**opinber** (*public*). Einkaaðferðir eru hjálparföll til að útfæra klasa og
+aðeins aðgengilegar í (öðrum) aðferðum hans, verndaðar aðferðir eru einnig
+aðgengilegar í undirklösum, og opinberar aðferðir eru aðgengilegar öllum sem
+nota klasann. Hliðstætt gildir um einka-, verndaða, og opinbera eiginleika.
 
 .. rubric:: Dæmi með erfðum
             
@@ -115,19 +116,24 @@ að nota fyrir klasa sem ekki á sér yfirklasa:
        klasabreyta = 42   # skilgreiningar klasabreyta
        ...                #
 
-       def __init__(self, stiki,...):   # smiður
-           self.eiginleiki1 = stiki     #
-           self.eiginleiki2 = gildi     #
-           self._einkaeiginliki = gildi #
-           ...                          #
-           # engin return skipun        #
+       def __init__(self, stiki,...):        # smiður
+           self.eiginleiki1 = stiki          #
+           self.eiginleiki2 = gildi          #
+           self._verndaðureiginleiki = gildi #
+           self.__einkaeiginleiki = gildi    #
+           ...                               #
+           # engin return skipun             #
 
        def aðferð(self, stiki...)  # opinber aðferð
            skipanir                # nota má self.eiginleiki til að vísa í eiginleika
            return                  # má sleppa ef aðferð skilar engu
 
-       def _aðferð(self, stiki...)  # einkaaðferð, aðeins ætluð til notkunar
-           ...                      # í öðrum aðferðum klasans
+       def _vernduðaðferð(self, stiki...)  # vernduð aðferð, aðeins ætluð til 
+           ...                             # notkunar í öðrum aðferðum klasans
+           ...                             # og undirklasa hans
+           
+       def __einkaaðferð(self, stiki...)   # einkaaðferð, aðeins ætluð til
+           ...                             # notkunar í klasanum sjálfum
            
        def __str__(self): # útskriftaraðferð
            skipanir       # ... sem búa til streng str úr self
@@ -153,10 +159,12 @@ hluturinn sem viðkomandi aðferð tilheyrir. Í skilgreiningu aðferðarinnar e
 vísað í eiginleika viðkomandi hlutar með forskeyti ``self.``, t.d.
 ``self.eiginleiki``.
 
-**Einkaeiginleikar** og **-aðferðir** eru aðeins ætluð til notkunar innan
-klasans og byrja nöfn þeirra samkvæmt hefð á undirstriki. Í flestum öðrum
-forritunarmálum eru slíkir hlutir ósýnilegir utan klasans, en í Python
-er svo ekki, og treyst á að notandi klasa virði bannið.
+**einkaeiginleikar** og **-aðferðir** eru eins og segir að framan aðeins
+aðgengilegir innan klasans. **Verndaðar aðferðir** og **verndaðir eiginleikar**,
+með nöfn sem byrja á einu undirstriki, eru auk þess aðgengileg í undirklösum. Í
+flestum öðrum forritunarmálum eru slíkir hlutir ósýnilegir annarsstaðar. Það
+gildir líka um einkahlutina í Python en hinsvegar ekki þá vernduðu; fyrir þá er
+er treyst á að notandi virði bannið
 
 Annað sérstakt nafn er ``__str__`` sem skilgreinir
 **útskriftaraðferð**. Ef henni er sleppt koma bara upplýsingar um að um sé að
@@ -326,7 +334,7 @@ rauðu breytt í bláan. Eftirfarandi mynd birtist:
 .. admonition:: Athugasemd: Frekari skýringar
    :class: athugid
 
-   Það eru tveir einkaeiginleikar, ``_mynd`` sem er Matplotlib-bendill á
+   Það eru tveir verndaðir eiginleikar, ``_mynd`` sem er Matplotlib-bendill á
    viðkomandi hringskífu, og ``_RGB`` sem er `RGB-þrennd
    <https://en.wikipedia.org/wiki/RGB_color_model#Numeric_representations>`_
    (þar sem rauður, grænn og blár litaþáttur fá hver um sig gildi á bilinu 0–1)
@@ -473,12 +481,12 @@ afstrakt klasann ``Flatarmynd`` sem allar flatarmyndir erfa frá.
 
    Klasinn hefur eiginleikana sem sýndir eru í klasaritinu á mynd
    :numref:`%s<klasarit>`, ``staðsetning``, ``flatarmál`` og ``litur``, og auk
-   þess einkaeiginleikann ``_polygon`` sem er Matplotlib bendill á útlínur
-   myndarinnar. Einkaaðferðin ``_teikna`` býr til sjálfa teikninguna, og í
+   þess verndaða eiginleikann ``_polygon`` sem er Matplotlib bendill á útlínur
+   myndarinnar. Verndaða aðferðin ``_teikna`` býr til sjálfa teikninguna, og í
    seinni sýnidæmunum kemur í ljós að hana þarf ekki að endurskilgreina í
    undirklösunum, heldur er hægt að nýta hana óbreytta. Það sama gildir um
    ``stroka_út``. Hins vegar þurfa undirklasarnir að útfæra báðar afstrakt
-   aðferðirnar ``breyta_stærð`` og ``_útlínur`` (sú seinni er einka).
+   aðferðirnar ``breyta_stærð`` og ``_útlínur`` (sú seinni er vernduð).
    Flatarmálið sýnir hvernig hægt er að skilgreina leseiginleika, sem er ekki
    hægt að breyta beint, og það þarf auðvitað líka að útfæra í öllum
    undirklösunum (`vefsíða sem útskýrir leseiginleika nánar
@@ -606,8 +614,9 @@ Rétthyrningur sem snýst
 Til gamans sýnum við hér að lokum notkun flatarmyndaklasans til að búa til
 hreyfimynd. Eins og með myndina í kafla :numref:`lifandi matplotlib mynd` hefur
 KJ ekki tekist að fá þessa til að birtast í Google Colab, aðeins í JupyterLab,
-og þá annaðhvort með bakendanum *qt* eða með *tk* (*widget*, sem notað var í
-kafla :numref:`lifandi matplotlib mynd` virkar ekki).
+og þá annaðhvort með bakendanum *tk* eða með *qt* (*widget*, sem notað var í
+kafla :numref:`lifandi matplotlib mynd` virkar ekki). Auk þess þarf e.t.v.
+að gefa skipun ``conda install ipympl`` áður en keyrt er.
 
 .. admonition:: Sýnidæmi: Snúningur
    :class: synidaemi
@@ -617,7 +626,7 @@ kafla :numref:`lifandi matplotlib mynd` virkar ekki).
 
    .. code:: python
 
-      %matplotlib qt
+      %matplotlib tk
       f = plt.figure(figsize=(4,4))
 
    Hér er svo forrit sem býr til rétthyrning og lætur hann snúast í heilan
@@ -630,6 +639,3 @@ kafla :numref:`lifandi matplotlib mynd` virkar ekki).
       for i in range(180):
           plt.pause(0.01)
           R.snúa(2)
-
-
-[EFNI Í VINNSLU]
